@@ -3,6 +3,7 @@ const { Deal } = require('../models'); // Import Deal model
 const router = express.Router();
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
+const authenticateToken = require('../middleware/auth');
 
 // Get all deals
 router.get('/', async (req, res) => {
@@ -15,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // Create a new deal
-router.post('/', async (req, res) => {
+router.post('/',authenticateToken, async (req, res) => {
   const { title, url, couponCode, association, startDate, expiryDate, isFreebie, category, tags, description } = req.body;
 
   try {

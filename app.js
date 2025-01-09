@@ -5,6 +5,7 @@ const cors = require('cors');
 const { sequelize } = require('./models'); // Import Sequelize instance from models
 const userRoutes = require('./routes/user'); // Import user routes
 const dealRoutes = require('./routes/deals'); // Import deal routes
+const authRoutes = require('./routes/auth');
 require('dotenv').config(); // Load environment variables from .env
 
 // Create the Express app
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors()); // Enable CORS for cross-origin requests
 app.use(bodyParser.json()); // Parse incoming JSON requests
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use('/api/auth', authRoutes);
 
 // Routes
 app.use('/api/users', userRoutes); // Routes for user-related operations
@@ -30,8 +32,8 @@ app.get('/', (req, res) => {
 sequelize.sync({ force: true }) // Use force: true to drop and recreate tables
   .then(() => {
     console.log('Database connected and synced successfully');
-    app.listen(PORT, () => {
-      console.log(`Server is runnin on http://localhost:${PORT}`);
+    app.listen(PORT,'0.0.0.0', () => {
+      console.log(`Server is runnin on http://0.0.0.0:${PORT}`);
     });
   })
   .catch(err => {

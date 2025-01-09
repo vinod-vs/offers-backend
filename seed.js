@@ -6,8 +6,7 @@ const seedDeals = async () => {
     console.log('Connected to Azure SQL successfully');
 
     await Deal.bulkCreate([
-      { title: '50% Off Shoes', description: 'Get 50% off on all running shoes for a limited time.', votes: 10 },
-      { title: 'Buy 1 Get 1 Free', description: 'Available on selected clothing items.', votes: 5 },
+      { title: '50% Off Shoes', description: 'Get 50% off on all running shoes for a limited time.', url: 'https://www.ozbargain.com.au/node/888046', category: 'tag', votes: 10 },
     ]);
 
     console.log('Seed data added successfully');
